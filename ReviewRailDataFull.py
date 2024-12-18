@@ -6,6 +6,7 @@ import ctypes
 # Custom Modules
 from shift_calc import *
 from interface_input import *
+from browser_automation import *
 from csv_processing import *
 from outlook_email_automation import *
 
@@ -35,24 +36,17 @@ try:
         input('\nExecution cancelled. \n\nPress enter to close this window...')
         sys.exit()
 
-    # Check if tempdata already exists in directory    
-    if(file_exists('tempdata')):
-        print('tempdata folder exists...')
-    else:
-        input_loop = True
-        while(input_loop==True):
-            overwrite = message_box('O/C' , 'Couldn\'t find \\tempdata\\ in script directory...\n\nWould you like a folder to be created for you?\n\nClick OK once complete, or Cancel to cancel the script...', 'tempdata folder doesn\'t exist!')
-            if(overwrite==True):
-                create_folder('tempdata')
-                if(file_exists('tempdata')):
-                    break
-                else:
-                    continue
-            elif(overwrite==None):
-                print('Cancelling...')
-                exit()
-
-    go = message_box('O/C', 'Start RVC csv downloads?') 
+    # # Check if tempdata already exists in directory    
+    # if(file_exists('tempdata')):
+    #     print('tempdata folder exists...')
+    # else:
+    #     input_loop = True
+    #     while(input_loop==True):
+    #         create_folder('tempdata')
+    #         if(file_exists('tempdata')):
+    #             break
+                
+    go = message_box('O/C', 'Start RVC csv downloads?', 'Proceed?') 
     print()
 
     if(go == None):
@@ -63,24 +57,27 @@ try:
     print('\n======================================\n')
     print('Downloading Cycle Point events from RVC...')
     cycle_points = 'https://rsb.bhp.com/rvc/Application/ExportCsv?eventsEnum=CyclePoints'
+    download_url(cycle_points)
     if(type(cycle_points)==int):
         raise ValueError('Could not obtain cycle point data from RVC', cycle_points)
+    
     # Download Car Count Data
     print('Downloading Car Count events from RVC...')
     car_counts = 'https://rsb.bhp.com/rvc/Application/ExportCsv/CarCounts?eventsEnum=CarCounts'
+    download_url(car_counts)
     if(car_counts==False):
         raise ValueError('Could not obtain car count data from RVC', car_counts)
 
     message_box('O', 'Download Successful', 'Success')
 
-    # Check if tempdata already exists in directory    
+    # Check if file exists in tempdta   
     if(file_exists('\\tempdata\\RVC.csv')):
         print('RVC.csv exists...')
     else:
         input_loop = True
         while(input_loop==True):
             open_folder('tempdata')
-            overwrite = message_box('O/C' , 'Couldn\'t find RVC.csv in \\tempdata\\...\n\nPlease export/download the cycle point data as RVC.csv into the \\tempdata\\ folder\n\nClick OK once complete, or Cancel to cancel the script...', 'RVC.csv doesn\'t exist!')
+            overwrite = message_box('O/C' ,'Couldn\'t find RVC.csv in \\tempdata\\...\n\nPlease export/download the cycle point data as RVC.csv into the \\tempdata\\ folder\n\nClick OK once complete, or Cancel to cancel the script...', 'RVC.csv doesn\'t exist!')
             if(overwrite==True):
                 if(file_exists('\\tempdata\\RVC.csv')):
                     break
@@ -109,7 +106,7 @@ try:
         cycle_points = clean_table_keep_notes(cycle_points)
     cycle_points_html = convert_to_html(cycle_points)
 
-    # Check if tempdata already exists in directory    
+    # Check if file exists in tempdata
     if(file_exists('\\tempdata\\RVC (1).csv')):
         print('RVC.csv exists...')
     else:
@@ -143,7 +140,7 @@ try:
     # Delete Downloaded CSV Files
     print('\n======================================\n')
     print('Deleting temporary data...')
-    delete_tempfolder()
+    delete_folder('tempdata')
 
     # Generate email as a pop up ready to send
     print('\n======================================\n')

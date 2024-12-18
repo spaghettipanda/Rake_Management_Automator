@@ -68,8 +68,8 @@ def download_url(url):
         safety_counter = safety_counter+1
 
 # Delete tempfolder
-def delete_tempfolder():
-    shutil.rmtree('tempdata')
+def delete_folder(dir):
+    shutil.rmtree(dir)
 
 # Check if file already exists
 def file_exists(file):
