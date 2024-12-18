@@ -4,3 +4,4 @@ selenium
 selenium-wire
 pywin32
 setuptools
+PyInstaller
