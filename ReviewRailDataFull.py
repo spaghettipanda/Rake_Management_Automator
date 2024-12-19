@@ -36,15 +36,17 @@ try:
         input('\nExecution cancelled. \n\nPress enter to close this window...')
         sys.exit()
 
-    # # Check if tempdata already exists in directory    
-    # if(file_exists('tempdata')):
-    #     print('tempdata folder exists...')
-    # else:
-    #     input_loop = True
-    #     while(input_loop==True):
-    #         create_folder('tempdata')
-    #         if(file_exists('tempdata')):
-    #             break
+    # Check if tempdata already exists in directory    
+    if(file_exists('tempdata')):
+        print('tempdata folder exists...')
+        delete_folder('tempdata')
+        create_folder('tempdata')
+    else:
+        input_loop = True
+        while(input_loop==True):
+            create_folder('tempdata')
+            if(file_exists('tempdata')):
+                break
                 
     go = message_box('O/C', 'Start RVC csv downloads?', 'Proceed?') 
     print()

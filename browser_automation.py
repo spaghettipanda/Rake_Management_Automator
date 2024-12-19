@@ -62,6 +62,7 @@ def download_url(url):
                     print('Download Successful ------------------\n')
             
             if not retry:
+                time.sleep(5)
                 driver.close()
                 break
         
