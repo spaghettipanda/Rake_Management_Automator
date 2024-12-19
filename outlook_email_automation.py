@@ -18,7 +18,7 @@ def generate_email(cycle_points, car_counts):
     index = newMail.HTMLbody.find('>', newMail.HTMLbody.find('<p')) 
 
     newMail.HTMLBody = newMail.HTMLbody[:index + 1] + (f'Hi HLO/MTM team,<br><br>Please assist with the data corrections for the following rakes:<br><br><span style=\"text-decoration: underline;\"><strong>Cycle Point Events</strong></span><br>{cycle_points}<br><span style=\"text-decoration: underline;\"><strong>Car Count Events</strong></span><br>{car_counts}<br>Thank you in advance,') + newMail.HTMLbody[index + 1:]
-    newMail.To = 'dl-ior-per-ironperiopshubscheduling@bhp.coms; dl-tech-railhistorian-productteam@bhp.com; DL-IOR-Perth-AS-MTSupport@bhp.com'
+    newMail.To = 'dl-ior-per-ironperiopshubscheduling@bhp.com; dl-tech-railhistorian-productteam@bhp.com; DL-IOR-Perth-AS-MTSupport@bhp.com'
     newMail.CC = 'dl-tech-minaus-run-troc-otproductionapplications@bhp.com; shaily.singh2@bhp.com; sathish.vailaya@bhp.com; iops_productionaccounting@bhp.com'
 
     # Display email as a pop up instead of sending immediately
