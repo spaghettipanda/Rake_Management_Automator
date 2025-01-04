@@ -1,12 +1,8 @@
 # %%
 import os
 # %%
-import ctypes
-import time
 from tkinter import *
-import tkinter as tk
 import tkinter.messagebox as tkmsg
-import tkinter.font as font
 
 # Message Box
 def message_box(type, message, title):
@@ -83,7 +79,6 @@ def message_box(type, message, title):
 def create_folder(dir):
     if not os.path.exists(dir):
         os.makedirs(dir)
-        open_folder(dir)
 
 def open_folder(dir):
     os.startfile(dir)

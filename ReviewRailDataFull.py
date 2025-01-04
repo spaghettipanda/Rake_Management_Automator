@@ -1,7 +1,6 @@
-# %%
+# When using PyInstaller, selenium-wire needs to be imported as a hook
+# Also, certificates need to be added i.e. PyInstaller --add-data '.venv\path\to\ca.crt;seleniumwire' -- add data '.venv\path\to\ca.key;seleniumwire' --onefile etc
 import sys
-import ctypes
-
 
 # Custom Modules
 from shift_calc import *
@@ -78,7 +77,6 @@ try:
     else:
         input_loop = True
         while(input_loop==True):
-            open_folder('tempdata')
             overwrite = message_box('O/C' ,'Couldn\'t find RVC.csv in \\tempdata\\...\n\nPlease export/download the cycle point data as RVC.csv into the \\tempdata\\ folder\n\nClick OK once complete, or Cancel to cancel the script...', 'RVC.csv doesn\'t exist!')
             if(overwrite==True):
                 if(file_exists('\\tempdata\\RVC.csv')):
@@ -114,7 +112,6 @@ try:
     else:
         input_loop = True
         while(input_loop==True):
-            open_folder('tempdata')
             overwrite = message_box('O/C' , 'Couldn\'t find RVC (1).csv in \\tempdata\\...\n\nPlease try manual export/download the car count data as RVC (1).csv into the \\tempdata\\ folder\n\nClick OK once complete, or Cancel to cancel the script...', 'RVC (1).csv doesn\'t exist!')
             if(overwrite==True):
                 if(file_exists('\\tempdata\\RVC (1).csv')):
@@ -163,7 +160,11 @@ except KeyboardInterrupt as err:
     input('\n\nPress enter to close this window...')
     sys.exit()
 
+except SystemExit as err:
+    sys.exit()
+
 except Exception as err:
-    print (err.args)
+    print (f'\nUnknown Exception!!\n\nFull Error: {err}')
+    print (f'\n\n\n{err.args}')
     input('\n\nPress enter to close this window...')
     sys.exit()

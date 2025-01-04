@@ -2,7 +2,7 @@
 # https://itsec.media/post/python-send-outlook-email/
 
 import win32com.client
-from win32com.client import Dispatch, constants
+from win32com.client import Dispatch, constants 
 from datetime import date as dt
     
 # Generate email - All elements are hardcoded except csv table data and signature sign off
